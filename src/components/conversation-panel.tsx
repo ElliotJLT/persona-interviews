@@ -16,7 +16,6 @@ import type { Citation, Message, Persona, SurveyResponse } from "@/lib/types";
 import { setSourcesOpen } from "@/lib/ui-store";
 import { ComposerPlusMenu } from "./composer-menu";
 import { MessageThread, ThinkingRow } from "./message-thread";
-import { PersonaMark } from "./persona-mark";
 
 /**
  * The interview. By this point the respondent has been read and chosen, so the
@@ -109,19 +108,15 @@ export function ConversationPanel({
       className="flex h-full w-full min-w-0 flex-col bg-card"
     >
       <header className="flex h-[4.75rem] shrink-0 items-center border-b border-border bg-surface px-6">
+        {/* The record beside the thread already carries the name and face,
+            so the header names the activity instead of repeating them. */}
         <div className="flex w-full items-center gap-3">
-          <PersonaMark
-            name={persona.name}
-            choice={response?.choice ?? ""}
-            personaId={persona.id}
-            size="sm"
-          />
           <div className="min-w-0 flex-1">
             <p className="truncate text-[0.9375rem] font-medium text-ink">
-              {persona.name}
+              Interview
             </p>
             <p className="truncate text-[0.75rem] text-ink-muted">
-              Simulated respondent
+              Simulated respondent · every claim marked by its source
             </p>
           </div>
 
