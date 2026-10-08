@@ -1,0 +1,161 @@
+@import "tailwindcss";
+
+/* Design tokens — see docs/design.md for the system these serve. */
+:root {
+  --surface: #f7f5f1;
+  --surface-sunk: #efece6;
+  --card: #ffffff;
+  --border: #e3dfd6;
+  --border-strong: #cec9bd;
+  --ink: #1d1b17;
+  --ink-muted: #6e695e;
+  --accent: #d1613f;
+  --accent-soft: #f6e7e0;
+
+  /* Categorical scale for survey options. Assigned in option order and held
+     constant everywhere that option appears, including inside a conversation.
+     Hues are spread as far as the warm palette allows so adjacent options stay
+     separable, and every use pairs the colour with the option name. */
+  --data-1: #7a4fb5;
+  --data-2: #2d6e9e;
+  --data-3: #c07f16;
+  --data-4: #ae4030;
+
+  /* Provenance sits outside the categorical scale so a citation can never be
+     mistaken for a survey option. Grounded carries colour because it has a
+     source; simulated is deliberately neutral and marked by form instead. */
+  --grounded: #3f6b4f;
+  --grounded-soft: #e6eee8;
+  --simulated: #6b6558;
+  --simulated-soft: #efece5;
+}
+
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-sunk: var(--surface-sunk);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-data-1: var(--data-1);
+  --color-data-2: var(--data-2);
+  --color-data-3: var(--data-3);
+  --color-data-4: var(--data-4);
+  --color-grounded: var(--grounded);
+  --color-grounded-soft: var(--grounded-soft);
+  --color-simulated: var(--simulated);
+  --color-simulated-soft: var(--simulated-soft);
+  --font-sans: var(--font-funnel);
+  --font-serif: Georgia, "Times New Roman", serif;
+}
+
+body {
+  background: var(--surface);
+  color: var(--ink);
+  font-family: var(--font-funnel), system-ui, sans-serif;
+  /* Tight tracking on display type. */
+  letter-spacing: -0.01em;
+}
+
+/* Micro-label: the small caption above a value. Used for record fields, never
+   for anything interactive. */
+.label {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+/* Verbatim: words the persona actually said in the survey. Serif is reserved
+   for this and for citation quotes; it never decorates UI copy. */
+.verbatim {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* The staged pause: three dots lifting in sequence. Honest about duration
+   without pretending the persona is typing. */
+@keyframes typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.45;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+/* A recent chat invites the click with a small repeating nudge on hover. */
+@keyframes nudge-x {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(3px);
+  }
+}
+
+/* A rating registers with a small pop rather than a silent state flip. */
+@keyframes thumb-pop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.35);
+  }
+  70% {
+    transform: scale(0.92);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* The interview arrives whole rather than growing into place. */
+@keyframes panel-rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
